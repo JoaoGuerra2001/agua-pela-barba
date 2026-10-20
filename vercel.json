@@ -4,5 +4,11 @@
       "includeFiles": "{config.json,db/**,admin/**,public/**}",
       "maxDuration": 30
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/backup",
+      "schedule": "0 4 * * *"
+    }
+  ]
 }

@@ -4,6 +4,7 @@ const path = require("path");
 const crypto = require("crypto");
 const express = require("express");
 const { Pool, types } = require("pg");
+const backup = require("./backup");
 
 const CONFIG = JSON.parse(fs.readFileSync(path.join(__dirname, "config.json"), "utf8"));
 const PORT = process.env.PORT || 3000;
@@ -265,6 +266,22 @@ app.post("/api/bookings/:id/cancel", async (req, res) => {
     notify(`Marcação CANCELADA pelo cliente: ${describe(b)}`);
   }
   res.json({ booking: publicBooking(await getBooking(b.id)) });
+});
+
+/* ---------- tarefa diária (Vercel Cron): cópia de segurança + mantém a base de dados ativa ---------- */
+app.get("/api/cron/backup", async (req, res) => {
+  const secret = process.env.CRON_SECRET || "";
+  if (!secret) return res.status(501).json({ error: "CRON_SECRET não definida." });
+  const h = req.headers.authorization || "";
+  if (!h.startsWith("Bearer ") || !safeEq(h.slice(7), secret)) return res.status(401).json({ error: "Não autorizado." });
+  try {
+    const snap = await backup.snapshot(q);
+    const saved = await backup.saveSnapshot(snap);
+    res.json({ ok: true, bookings: snap.bookings.length, blocks: snap.blocks.length, ...saved });
+  } catch (e) {
+    console.error("[backup]", e.message);
+    res.status(500).json({ ok: false, error: e.message });
+  }
 });
 
 /* ---------- painel da barbearia ---------- */

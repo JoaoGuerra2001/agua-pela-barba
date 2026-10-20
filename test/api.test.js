@@ -117,3 +117,16 @@ test("duas marcações em simultâneo para a mesma hora: só uma entra", async (
   const codes = rs.map((r) => r.status).sort();
   assert.deepEqual(codes, [201, 409, 409, 409, 409]);
 });
+
+test("tarefa diária de cópia exige o segredo e gera o conteúdo", async () => {
+  assert.equal((await call("/api/cron/backup")).status, 501); // sem CRON_SECRET
+  process.env.CRON_SECRET = "segredo-teste";
+  assert.equal((await call("/api/cron/backup")).status, 401);
+  assert.equal((await call("/api/cron/backup", { headers: { authorization: "Bearer errado" } })).status, 401);
+  const ok = await call("/api/cron/backup", { headers: { authorization: "Bearer segredo-teste" } });
+  assert.equal(ok.status, 500); // sem BLOB_READ_WRITE_TOKEN falha de forma clara, não em silêncio
+  assert.match((await ok.json()).error, /BLOB_READ_WRITE_TOKEN/);
+  const snap = await require("../backup").snapshot((t, p) => pool.query(t, p).then((r) => r.rows));
+  assert.ok(snap.bookings.length >= 1 && snap.createdAt);
+  delete process.env.CRON_SECRET;
+});

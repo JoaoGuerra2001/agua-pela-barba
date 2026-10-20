@@ -54,6 +54,13 @@ Quem escolhe pagar online fica com a hora reservada 30 minutos; se não pagar, a
 - Cancelamentos pelo cliente: até `cancelHoursBefore` horas antes, só se ainda não pagou online. Reembolsos de pagamentos online fazem-se no painel do Stripe.
 - Bloquear um período onde já há marcações não as cancela: o painel avisa e é preciso tratar delas à mão.
 
+## 6. Cópia diária e base de dados sempre ativa
+O `vercel.json` agenda `/api/cron/backup` todos os dias às 04:00 (UTC). A tarefa lê a base de dados (o que a mantém ativa no Supabase gratuito, evitando a pausa por inatividade) e guarda uma cópia JSON **privada** no Vercel Blob, com as últimas 14 dias.
+1. No Vercel: Storage › Create › **Blob** (privado) e ligue-o ao projeto. Isto cria `BLOB_READ_WRITE_TOKEN`.
+2. Em Environment Variables crie `CRON_SECRET` com um texto longo inventado por si. O Vercel envia-o sozinho à tarefa.
+3. Faça Redeploy. Em Settings › Cron Jobs pode correr a tarefa à mão para testar (deve responder `ok: true`).
+Para repor a última cópia (por exemplo num projeto Supabase novo): `DATABASE_URL=... BLOB_READ_WRITE_TOKEN=... node scripts/restore.js` (não apaga nada, só acrescenta o que falta).
+
 ## Notas
 - Os dados estão no Supabase (tabelas `bookings` e `blocks`, com acesso só pelo servidor). O Supabase faz cópias diárias nos planos pagos; no gratuito, exporte de tempos a tempos.
 - Testes: `TEST_DATABASE_URL=postgres://… npm test` (usa uma base de teste e apaga as tabelas, nunca a real).

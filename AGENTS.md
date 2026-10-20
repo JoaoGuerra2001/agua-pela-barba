@@ -14,6 +14,9 @@ Escrever sempre em português de Portugal (textos, commits, comentários).
 - Vercel (Express como função: `module.exports = app` em `server.js`, `vercel.json`). `DATABASE_URL` = Transaction pooler do Supabase (porta 6543). Sem disco nem processos em segundo plano.
 - O limite de pedidos (`limit()`) é em memória, por instância: no Vercel é só uma proteção fraca.
 
+## Cópias
+- `backup.js` + `GET /api/cron/backup` (Vercel Cron diário, exige `CRON_SECRET`) gravam JSON privado no Vercel Blob (`BLOB_READ_WRITE_TOKEN`, 14 cópias). `scripts/restore.js` repõe a última, sem apagar.
+
 ## Comandos
 - `npm install` · `TEST_DATABASE_URL=postgres://... npm test` (tem de passar sempre; apaga as tabelas, usar só uma base de teste, nunca a real) · `DATABASE_URL=... ADMIN_PASSWORD=xxx npm start` (porta 3000) · `npm run build:demo`
 
