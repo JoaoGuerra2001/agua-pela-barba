@@ -4,21 +4,21 @@ Site de marcações em pt-PT para o cabeleireiro/barbearia "Água pela Barba" (L
 Escrever sempre em português de Portugal (textos, commits, comentários).
 
 ## Stack e estrutura
-- Node >= 20, Express, better-sqlite3 (ficheiro em `DATA_DIR/bookings.db`), Stripe Checkout (cartão + MB WAY).
+- Node >= 20, Express, `pg` + Postgres no Supabase (projeto `agua-pela-barba`, esquema em `db/schema.sql`, variável `DATABASE_URL`), Stripe Checkout (cartão + MB WAY).
 - `server.js` API + estáticos · `config.json` dados do negócio (horário, serviços, contactos, galeria, equipa)
 - `public/` site do cliente (JS/CSS vanilla) · `admin/` painel (Basic Auth com `ADMIN_PASSWORD`)
 - `demo/` demos em ficheiro único: `shim.js` simula o servidor; `node demo/build.js` regenera `demo/*.html`
-- `test/api.test.js` testes da API
+- `test/api.test.js` testes da API (precisam de um Postgres de teste)
 
 ## Comandos
-- `npm install` · `npm test` (tem de passar sempre) · `ADMIN_PASSWORD=xxx npm start` (porta 3000) · `npm run build:demo`
+- `npm install` · `TEST_DATABASE_URL=postgres://... npm test` (tem de passar sempre; apaga as tabelas, usar só uma base de teste, nunca a real) · `DATABASE_URL=... ADMIN_PASSWORD=xxx npm start` (porta 3000) · `npm run build:demo`
 
 ## Regras (não quebrar)
 - CSP estrita: sem scripts nem estilos inline, sem `innerHTML` com dados do utilizador (usar `textContent`).
   Novas origens externas só se forem mesmo necessárias e com a CSP em `server.js` atualizada.
 - Nunca guardar nem pedir dados de cartão: o pagamento é sempre no Stripe Checkout.
-- Segredos só por variáveis de ambiente (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `ADMIN_PASSWORD`, `NOTIFY_WEBHOOK`). Nunca em ficheiros, commits ou no chat. `.env` e `data/` ficam no `.gitignore`.
-- Fuso Europe/Lisbon. Marcação = verificação + inserção atómicas (transação). Manter as reservas temporárias (`HOLD_MINUTES`) para pagamentos online pendentes.
+- Segredos só por variáveis de ambiente (`DATABASE_URL`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `ADMIN_PASSWORD`, `NOTIFY_WEBHOOK`). Nunca em ficheiros, commits ou no chat. `.env` fica no `.gitignore`.
+- Fuso Europe/Lisbon. Marcação = verificação + inserção atómicas (transação com `pg_advisory_xact_lock` por dia). Manter as reservas temporárias (`HOLD_MINUTES`) para pagamentos online pendentes.
 - Estados: confirmada, paga, a_aguardar_pagamento, cancelada, concluida, faltou.
 - Quando mudares `public/` ou `admin/`, corre `npm run build:demo` para as demos ficarem iguais.
 - Testar pagamentos só com chaves Stripe de teste (`sk_test_...`) e `stripe listen` para o webhook.

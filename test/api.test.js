@@ -1,18 +1,21 @@
 "use strict";
-// Testes de fumo da API. Correr com: npm test
+// Testes da API contra um Postgres de TESTE (apaga as tabelas!). Correr com:
+//   TEST_DATABASE_URL=postgres://utilizador@localhost:5432/apb_test npm test
+// Nunca usa DATABASE_URL, para não tocar na base de dados real.
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const fs = require("fs"), os = require("os"), path = require("path");
 
-process.env.DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "apb-test-"));
+const TEST_URL = process.env.TEST_DATABASE_URL;
+if (!TEST_URL) { console.log("TEST_DATABASE_URL não definida: testes ignorados."); process.exit(0); }
+process.env.DATABASE_URL = TEST_URL;
 process.env.ADMIN_PASSWORD = "teste123";
 delete process.env.STRIPE_SECRET_KEY;
 const CONFIG = require("../config.json");
-const { app } = require("../server");
+const { app, pool, ready } = require("../server");
 
 let server, base;
-test.before(async () => { await new Promise((r) => { server = app.listen(0, r); }); base = `http://localhost:${server.address().port}`; });
-test.after(() => server.close());
+test.before(async () => { await ready; await pool.query("TRUNCATE bookings, blocks"); await new Promise((r) => { server = app.listen(0, r); }); base = `http://localhost:${server.address().port}`; });
+test.after(async () => { server.close(); await pool.end(); });
 
 const call = (p, o = {}) => fetch(base + p, { ...o, headers: { "content-type": "application/json", ...(o.headers || {}) } });
 const ADMIN = { authorization: "Basic " + Buffer.from("x:teste123").toString("base64") };
@@ -106,4 +109,11 @@ test("cabeçalhos de segurança estão presentes", async () => {
   const r = await call("/"); const csp = r.headers.get("content-security-policy");
   assert.ok(csp && csp.includes("script-src 'self'") && !csp.includes("unsafe-inline"));
   assert.equal(r.headers.get("x-content-type-options"), "nosniff");
+});
+
+test("duas marcações em simultâneo para a mesma hora: só uma entra", async () => {
+  const day = openDays(3)[2];
+  const rs = await Promise.all([1, 2, 3, 4, 5].map((i) => post("/api/admin/bookings", person({ day, time: "11:00", name: "Corrida " + i }), ADMIN)));
+  const codes = rs.map((r) => r.status).sort();
+  assert.deepEqual(codes, [201, 409, 409, 409, 409]);
 });

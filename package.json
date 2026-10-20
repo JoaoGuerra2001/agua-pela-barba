@@ -9,8 +9,8 @@
     "build:demo": "node demo/build.js"
   },
   "dependencies": {
-    "better-sqlite3": "^13.0.3",
     "express": "^5.3.0",
+    "pg": "^8.23.1",
     "stripe": "^23.0.0"
   },
   "private": true,

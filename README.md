@@ -8,8 +8,9 @@ Em `demo/` há dois ficheiros para abrir no navegador: `demo-site-cliente.html` 
 ## 1. Correr no computador
 ```
 npm install
-ADMIN_PASSWORD=qualquer-coisa npm start
+DATABASE_URL="postgresql://..." ADMIN_PASSWORD=qualquer-coisa npm start
 ```
+A base de dados é Postgres no Supabase (`DATABASE_URL`, ver secção 3). As tabelas criam-se sozinhas ao arrancar (`db/schema.sql`).
 Site: http://localhost:3000 · Painel: http://localhost:3000/admin (a palavra-passe é `ADMIN_PASSWORD`).
 
 ## 2. O que tem de editar (`config.json`)
@@ -24,10 +25,10 @@ Os valores atuais são **exemplos**; só o nome e a morada vêm do Google Maps.
   As secções só aparecem se tiverem conteúdo.
 
 ## 3. Publicar
-Precisa de um serviço que corra Node.js **com disco persistente** (a base de dados é um ficheiro SQLite). Por exemplo Render, Railway ou Fly.io.
+Precisa de um serviço que corra Node.js (Render, Railway, Fly.io…). Não precisa de disco: os dados ficam no Supabase.
 1. Envie esta pasta para um repositório e crie um serviço Node (`npm install` / `npm start`).
 2. Defina as variáveis de `.env.example`. `BASE_URL` é o endereço público final (com https).
-3. Aponte `DATA_DIR` para o disco persistente (por exemplo `/data`), senão as marcações perdem-se a cada atualização.
+3. Em `DATABASE_URL` ponha a ligação do Supabase (Project Settings › Database › Connection string › **Session pooler**, com a palavra-passe da base de dados). É um segredo: só nas variáveis do alojamento.
 4. Ligue o domínio da barbearia.
 
 ## 4. Ativar “Pagar agora” (Stripe)
@@ -54,5 +55,6 @@ Quem escolhe pagar online fica com a hora reservada 30 minutos; se não pagar, a
 - Bloquear um período onde já há marcações não as cancela: o painel avisa e é preciso tratar delas à mão.
 
 ## Notas
-- A base de dados é `DATA_DIR/bookings.db`; faça cópias de segurança.
+- Os dados estão no Supabase (tabelas `bookings` e `blocks`, com acesso só pelo servidor). O Supabase faz cópias diárias nos planos pagos; no gratuito, exporte de tempos a tempos.
+- Testes: `TEST_DATABASE_URL=postgres://… npm test` (usa uma base de teste e apaga as tabelas, nunca a real).
 - Guarda nome, telemóvel e email dos clientes: convém ter uma política de privacidade (RGPD) no site.
