@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1F2A">
+<title>Painel · Água pela Barba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><span class="pole" aria-hidden="true"></span><b>Água pela Barba</b><span class="muted">Painel</span></div>
+    <div class="top-act">
+      <span class="muted small" id="updated" aria-live="polite"></span>
+      <button class="btn ghost" id="reload" type="button">Atualizar</button>
+      <button class="btn" id="newBooking" type="button">Nova marcação</button>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Secções do painel"></nav>
+</header>
+
+<main id="view" tabindex="-1"><p class="empty">A carregar…</p></main>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"><div class="dlg" id="dlgBody"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

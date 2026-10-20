@@ -1,0 +1,20 @@
+{
+  "name": "agua-pela-barba",
+  "version": "1.0.0",
+  "description": "Site e marcações da barbearia Água pela Barba (Fermentelos)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "build:demo": "node demo/build.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.3.0",
+    "stripe": "^23.0.0"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}

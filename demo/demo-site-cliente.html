@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Água pela Barba · Barbearia em Fermentelos</title>
+<meta name="description" content="Marque o seu corte ou barba em Fermentelos. Escolha a hora e pague agora ou no dia.">
+<meta name="theme-color" content="#0B1F2A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='10' y='2' width='12' height='28' rx='6' fill='%230B1F2A'/%3E%3Cpath d='M10 10l12-6M10 18l12-6M10 26l12-6' stroke='%23C8382B' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1F2A; --ink2:#12303F;
+  --foam:#EEF5F6; --paper:#FFFFFF;
+  --tide:#1B6580; --pole:#C8382B; --brass:#C79A3B;
+  --line:#CFDDE1; --muted:#4C6672;
+  --err:#B3261E; --radius:14px;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ink:#E8F1F3;--ink2:#C7DCE2;--foam:#0A1A22;--paper:#112A36;--tide:#6CC0D9;--line:#27475A;--muted:#9DBBC4;--err:#FF8A80}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font:17px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--foam)}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.02;letter-spacing:-.02em;margin:0}
+h2{font-size:clamp(2rem,6vw,3rem);margin-bottom:10px}
+a{color:var(--tide)}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+.sub{color:var(--muted);max-width:56ch;margin:0 0 26px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* botões */
+.btn{display:inline-block;background:var(--pole);color:#fff;font:700 1rem Figtree,sans-serif;padding:14px 26px;border-radius:999px;border:0;text-decoration:none;cursor:pointer;transition:transform .12s,filter .12s}
+.btn:hover{filter:brightness(1.08)}
+.btn:active{transform:translateY(1px)}
+.btn.small{padding:8px 18px;font-size:.95rem}
+.btn.full{width:100%;text-align:center}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:inherit;border:2px solid currentColor}
+.link{font-weight:600;color:#C7DCE2}
+
+/* navegação */
+.nav{position:sticky;top:0;z-index:20;background:rgba(11,31,42,.94);backdrop-filter:blur(8px)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;height:60px}
+.nav a{color:#EEF5F6;text-decoration:none}
+.nav .brand{font:800 1.1rem "Bricolage Grotesque",sans-serif}
+.nav nav{display:flex;align-items:center;gap:20px}
+.nav nav a:not(.btn){font-weight:500}
+@media(max-width:640px){.nav nav a:not(.btn){display:none}}
+
+/* hero */
+.hero{background:#0B1F2A;color:#EEF5F6;overflow:hidden}
+.hero-in{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding-top:56px;padding-bottom:72px}
+.hero h1{font-size:clamp(3.4rem,13vw,8.4rem);font-weight:800}
+.hero h1 span{display:block}
+.hero h1 span+span{padding-left:.5em}
+.lead{font-size:clamp(1.2rem,3vw,1.6rem);font-family:"Bricolage Grotesque",sans-serif;font-weight:500;margin:22px 0 4px}
+.lead2{margin:0 0 28px;color:#C7DCE2;max-width:36ch}
+.hero-cta{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+@media(max-width:700px){.hero-in{grid-template-columns:1fr}.pole{display:none}}
+
+/* o poste de barbeiro: o único movimento da página */
+.pole{display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 20px 30px rgba(0,0,0,.35))}
+.pole-cap{width:104px;height:30px;border-radius:12px;background:linear-gradient(90deg,#8A6A22,#E3C06A 45%,#8A6A22)}
+.pole-tube{position:relative;width:84px;height:340px;overflow:hidden;background:#fff}
+.pole-tube::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.35) 28%,rgba(255,255,255,0) 55%,rgba(0,0,0,.4))}
+.stripes{position:absolute;left:0;right:0;top:-102px;bottom:0;
+  background:repeating-linear-gradient(-45deg,#fff 0 18px,var(--pole) 18px 36px,#fff 36px 54px,#1B4F8A 54px 72px);
+  animation:rise 3.2s linear infinite}
+@keyframes rise{to{transform:translateY(101.82px)}}
+
+/* secções */
+.band{background:var(--paper);padding:64px 0}
+.sec{padding-top:64px;padding-bottom:20px}
+section{scroll-margin-top:60px}
+
+/* serviços */
+.services{border-top:3px solid var(--ink)}
+.svc{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.svc b{font:700 1.6rem "Bricolage Grotesque",sans-serif}
+.svc .price{font:800 1.9rem "Bricolage Grotesque",sans-serif;white-space:nowrap}
+.svc p{margin:0;color:var(--muted);grid-column:1}
+.svc small{color:var(--muted);grid-column:2;text-align:right}
+
+/* como */
+.how{padding-top:64px;padding-bottom:20px}
+.steps{list-style:none;counter-reset:s;padding:0;margin:20px 0 0;display:grid;gap:0;border-left:3px solid var(--pole)}
+.steps li{counter-increment:s;position:relative;padding:6px 0 22px 26px;display:grid}
+.steps li::before{content:counter(s);position:absolute;left:-17px;top:4px;width:31px;height:31px;border-radius:50%;background:var(--pole);color:#fff;font-weight:700;display:grid;place-items:center}
+.steps b{font:700 1.3rem "Bricolage Grotesque",sans-serif}
+.steps span{color:var(--muted)}
+@media(min-width:760px){.steps{border-left:0;grid-template-columns:repeat(3,1fr);gap:28px;border-top:3px solid var(--pole);padding-top:0}
+  .steps li{padding:22px 0 0}.steps li::before{left:0;top:-17px}.steps li{padding-top:26px}}
+
+/* marcação */
+.book-sec{background:var(--paper);padding:64px 0 72px;margin-top:64px;border-radius:32px 32px 0 0}
+.book{display:grid;gap:28px}
+.book>*{min-width:0}
+@media(min-width:900px){.book{grid-template-columns:1fr 340px;align-items:start}}
+fieldset{border:0;padding:0;margin:0 0 28px;min-width:0}
+legend{font:700 1.3rem "Bricolage Grotesque",sans-serif;margin-bottom:12px;padding:0}
+.opts{display:grid;gap:10px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opt label{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--paper);cursor:pointer;transition:border-color .15s,background .15s}
+.opt label small{display:block;color:var(--muted)}
+.opt input:checked+label{border-color:var(--tide);background:color-mix(in srgb,var(--tide) 12%,var(--paper))}
+.opt input:focus-visible+label{outline:3px solid var(--brass);outline-offset:2px}
+.opt input:disabled+label{opacity:.45;cursor:not-allowed}
+.days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity}
+.days .opt{flex:0 0 auto;scroll-snap-align:start}
+.days label{flex-direction:column;justify-content:center;min-width:70px;padding:10px 6px;text-align:center;line-height:1.2}
+.days label span{font-size:.8rem;color:var(--muted)}
+.days label b{font:700 1.6rem "Bricolage Grotesque",sans-serif}
+.days input:disabled+label{text-decoration:line-through}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+.slots label{justify-content:center;padding:11px 6px;font-weight:700}
+.slots input:disabled+label{text-decoration:line-through}
+.msg{padding:14px 16px;border-radius:var(--radius);background:var(--foam);border:1px dashed var(--line);color:var(--muted)}
+.field{display:grid;gap:6px;margin-bottom:12px}
+.field label{font-weight:600}
+.field input{font:inherit;padding:13px 14px;border:2px solid var(--line);border-radius:var(--radius);background:var(--paper);color:var(--ink);width:100%}
+.field input[aria-invalid="true"]{border-color:var(--err)}
+.err{color:var(--err);font-size:.92rem;min-height:1.2em}
+.form-err{font-weight:600}
+
+.sum{background:#0B1F2A;color:#EEF5F6;border-radius:24px;padding:24px;position:sticky;top:76px}
+.sum h3{font-size:1.6rem;margin-bottom:14px}
+.sum dl{margin:0 0 16px;display:grid;grid-template-columns:auto 1fr;gap:8px 14px}
+.sum dt{color:#9DBBC4}
+.sum dd{margin:0;text-align:right;font-weight:600}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #35566A;padding-top:14px;margin-bottom:16px;font:800 1.8rem "Bricolage Grotesque",sans-serif}
+.hint{font-size:.88rem;color:#9DBBC4;margin:10px 0 0}
+
+/* equipa, galeria */
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
+.member img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius);background:var(--line)}
+.member b{display:block;font:700 1.2rem "Bricolage Grotesque",sans-serif;margin-top:8px}
+.member span{color:var(--muted)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);background:var(--line)}
+
+/* dúvidas */
+.faq details{border-bottom:1px solid var(--line);padding:16px 0}
+.faq details:first-of-type{border-top:3px solid var(--ink)}
+.faq summary{font:700 1.2rem "Bricolage Grotesque",sans-serif;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.5rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:10px 0 0;color:var(--muted);max-width:62ch}
+
+/* onde */
+.where{display:grid;gap:28px}
+@media(min-width:900px){.where{grid-template-columns:1fr 1.3fr}}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:600}
+.hours{list-style:none;padding:0;margin:16px 0 0}
+.hours li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line)}
+.map{border:0;width:100%;min-height:360px;border-radius:var(--radius)}
+footer{padding:26px 0 40px;font-size:.9rem;color:var(--muted)}
+
+/* confirmação */
+dialog{border:0;border-radius:24px;padding:0;max-width:460px;width:calc(100% - 32px);color:var(--ink);background:var(--paper)}
+dialog::backdrop{background:rgba(6,18,24,.65)}
+.dlg{padding:28px}
+.dlg h3{font-size:1.9rem;margin-bottom:12px}
+.dlg p{margin:0 0 10px}
+.ref{display:inline-block;margin:6px 0;padding:6px 12px;border-radius:8px;background:var(--foam);font-weight:700}
+.row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* contactos */
+.quick{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 6px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:2px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600;background:var(--paper);transition:border-color .15s}
+.chip:hover{border-color:var(--tide)}
+.hero .chip{background:transparent;color:#EEF5F6;border-color:#35566A}
+.hero .chip:hover{border-color:#8FD3E6}
+.chips.small .chip{padding:6px 12px;font-size:.9rem}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.mbar{display:none}
+@media(max-width:700px){
+  .mbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(11,31,42,.96);backdrop-filter:blur(8px)}
+  .mbar[hidden]{display:none}
+  .mbar .btn{text-align:center;padding:12px}
+  .mbar .btn.ghost{color:#EEF5F6}
+  body.has-mbar{padding-bottom:72px}
+}
+
+/* equipa: iniciais quando não há foto */
+.member .ph{width:100%;aspect-ratio:4/5;border-radius:var(--radius);background:linear-gradient(160deg,var(--tide),#0B1F2A);color:#EEF5F6;display:grid;place-items:center;font:800 3.4rem "Bricolage Grotesque",sans-serif}
+
+/* galeria */
+.gallery{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.g-item{position:relative;padding:0;border:0;background:none;cursor:zoom-in;border-radius:var(--radius);overflow:hidden;display:block}
+.g-item img{display:block;transition:transform .25s}
+.g-item:hover img{transform:scale(1.04)}
+.g-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;color:#fff;font-weight:600;text-align:left;background:linear-gradient(transparent,rgba(5,15,20,.75))}
+.lb{border:0;padding:16px;background:transparent;max-width:min(920px,96vw);width:100%;overflow:visible}
+.lb::backdrop{background:rgba(5,15,20,.85)}
+.lb figure{margin:0}
+.lb img{width:100%;max-height:76vh;object-fit:contain;border-radius:var(--radius);display:block;background:#0B1F2A}
+.lb figcaption{color:#EEF5F6;margin-top:10px;text-align:center}
+.lb-x{display:block;margin:14px auto 0;color:#EEF5F6}
+
+/* acertos */
+@media(max-width:700px){.pole{display:none}}
+.sec h2{margin-bottom:22px}
+
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#topo" id="brandName">Água pela Barba</a>
+    <nav aria-label="Principal">
+      <a href="#servicos">Serviços</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="#onde">Onde</a>
+      <a class="btn small" href="#marcar">Marcar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div class="hero-text">
+        <h1><span>Água</span><span>pela Barba</span></h1>
+        <p class="lead" id="tagline">Corte e barba em Fermentelos.</p>
+        <p class="lead2">Escolha a hora, pague agora ou só quando chegar.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#marcar">Marcar a minha hora</a>
+          <a class="link" href="#servicos">Ver serviços e preços</a>
+        </div>
+        <div class="quick" id="quick"></div>
+      </div>
+      <div class="pole" aria-hidden="true"><div class="pole-cap"></div><div class="pole-tube"><div class="stripes"></div></div><div class="pole-cap"></div></div>
+    </div>
+  </section>
+
+  <section id="servicos" class="band">
+    <div class="wrap">
+      <h2>Serviços</h2>
+      <p class="sub">Preços finais, com IVA incluído.</p>
+      <div class="services" id="svcList"></div>
+    </div>
+  </section>
+
+  <section id="como" class="wrap how">
+    <h2>Como marcar</h2>
+    <ol class="steps">
+      <li><b>Escolha</b><span>o serviço, o dia e uma hora livre.</span></li>
+      <li><b>Deixe</b><span>o seu nome e telemóvel.</span></li>
+      <li><b>Pague</b><span>agora ou só no dia, na barbearia.</span></li>
+    </ol>
+  </section>
+
+  <section id="marcar" class="book-sec">
+    <div class="wrap">
+      <h2>Marque a sua hora</h2>
+      <p class="sub">Só aparecem horas livres. A confirmação fica logo no ecrã.</p>
+
+      <form class="book" id="form" novalidate>
+        <div class="book-main">
+          <fieldset>
+            <legend>Serviço</legend>
+            <div class="opts" id="svcOpts"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Dia</legend>
+            <div class="days" id="dayOpts" role="radiogroup" aria-label="Dia"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Hora</legend>
+            <div id="slotBox"><div class="msg">Escolha primeiro o serviço e o dia.</div></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Os seus dados</legend>
+            <div class="field"><label for="nome">Nome</label><input id="nome" autocomplete="name" maxlength="80" required><div class="err" id="e-nome"></div></div>
+            <div class="field"><label for="tel">Telemóvel</label><input id="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="912 345 678" maxlength="20" required><div class="err" id="e-tel"></div></div>
+            <div class="field"><label for="email">Email (opcional)</label><input id="email" type="email" autocomplete="email" maxlength="120"><div class="err" id="e-email"></div></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Pagamento</legend>
+            <div class="opts">
+              <div class="opt"><input type="radio" name="pay" id="payLater" value="later" checked><label for="payLater"><span><b>Pagar no dia</b><small>Paga na barbearia, depois do serviço</small></span></label></div>
+              <div class="opt"><input type="radio" name="pay" id="payNow" value="now"><label for="payNow"><span><b>Pagar agora</b><small id="payNowSmall">MB WAY ou cartão, em página segura</small></span></label></div>
+            </div>
+          </fieldset>
+          <div class="err form-err" id="e-form" role="alert"></div>
+        </div>
+
+        <aside class="sum" aria-live="polite">
+          <h3>A sua marcação</h3>
+          <dl>
+            <dt>Serviço</dt><dd id="sSvc">—</dd>
+            <dt>Dia</dt><dd id="sDay">—</dd>
+            <dt>Hora</dt><dd id="sTime">—</dd>
+            <dt>Pagamento</dt><dd id="sPay">No dia</dd>
+          </dl>
+          <div class="total"><span>Total</span><span id="sTotal">—</span></div>
+          <button class="btn full" id="submit" type="button" disabled>Confirmar marcação</button>
+          <p class="hint" id="hint">Escolha serviço, dia e hora para continuar.</p>
+        </aside>
+      </form>
+    </div>
+  </section>
+
+  <section id="equipa" class="wrap sec" hidden>
+    <h2>A equipa</h2>
+    <div class="team" id="teamList"></div>
+  </section>
+
+  <section id="galeria" class="wrap sec" hidden>
+    <h2>Trabalhos</h2>
+    <div class="gallery" id="galList"></div>
+  </section>
+
+  <section id="duvidas" class="wrap sec faq">
+    <h2>Dúvidas</h2>
+    <div id="faqList"></div>
+  </section>
+
+  <section id="onde" class="band">
+    <div class="wrap where">
+      <div>
+        <h2>Onde estamos</h2>
+        <p class="sub" id="addr"></p>
+        <div class="chips" id="contactLinks"></div>
+        <ul class="hours" id="hoursList"></ul>
+      </div>
+      <iframe class="map" id="mapFrame" title="Mapa da barbearia em Fermentelos" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap foot"><span><span id="yr"></span> Água pela Barba · Fermentelos</span><span class="chips small" id="footLinks"></span></div></footer>
+
+<div class="mbar" id="mbar" hidden></div>
+
+<dialog id="lightbox" class="lb" aria-label="Foto ampliada">
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="btn ghost lb-x" id="lbClose" type="button">Fechar</button>
+</dialog>
+
+<dialog id="done" aria-labelledby="dTitle">
+  <div class="dlg">
+    <h3 id="dTitle"></h3>
+    <div id="dBody"></div>
+    <div class="ref" id="dRef"></div>
+    <div class="row" id="dActs"></div>
+  </div>
+</dialog>
+
+<script>
+/* Servidor simulado para as demonstrações. Site e painel partilham os mesmos dados (localStorage) no mesmo navegador. */
+(function () {
+  const CFG = {
+  "name": "Água pela Barba",
+  "tagline": "Corte e barba em Fermentelos",
+  "address": "Largo Sra. da Saúde, 3750-435 Fermentelos",
+  "mapsLink": "https://maps.app.goo.gl/ssPFQTwYXAQDVCNV9",
+  "phone": "",
+  "whatsapp": "",
+  "instagram": "",
+  "facebook": "",
+
+  "hours": {
+    "0": null,
+    "1": null,
+    "2": ["09:00", "19:00"],
+    "3": ["09:00", "19:00"],
+    "4": ["09:00", "19:00"],
+    "5": ["09:00", "19:00"],
+    "6": ["09:00", "18:00"]
+  },
+  "breakTime": ["13:00", "14:00"],
+  "slotMinutes": 30,
+  "daysAhead": 21,
+  "minLeadMinutes": 30,
+  "cancelHoursBefore": 2,
+
+  "services": [
+    { "id": "corte", "name": "Corte", "minutes": 30, "priceCents": 1000, "description": "Corte à máquina ou tesoura, com acabamento." },
+    { "id": "barba", "name": "Barba", "minutes": 30, "priceCents": 600, "description": "Aparar e desenhar a barba." },
+    { "id": "combo", "name": "Corte e barba", "minutes": 60, "priceCents": 1400, "description": "O serviço completo, numa só marcação." }
+  ],
+
+  "team": [],
+  "gallery": []
+}
+;
+  const MODE = "cliente"; // "cliente" | "admin"
+
+  /* ---- dados de exemplo só para a demonstração (não são da barbearia) ---- */
+  Object.assign(CFG, {
+    phone: "+351 912 345 678", whatsapp: "351912345678",
+    instagram: "https://www.instagram.com/", facebook: "https://www.facebook.com/",
+    team: [{ name: "Barbeiro 1", role: "Barbeiro" }, { name: "Barbeiro 2", role: "Barbeiro" }, { name: "Aprendiz", role: "Em formação" }],
+  });
+  const ICON = {
+    scissors: '<circle cx="9" cy="9" r="4"/><circle cx="9" cy="23" r="4"/><path d="M12 11l14 12M12 21L26 9" stroke-width="2.6" fill="none"/>',
+    razor: '<rect x="6" y="14" width="22" height="7" rx="2"/><path d="M28 17h9v3h-9z"/><path d="M8 14l3-5h14l3 5" fill="none" stroke-width="2.4"/>',
+    comb: '<rect x="4" y="10" width="34" height="8" rx="2"/><path d="M8 18v10M14 18v10M20 18v10M26 18v10M32 18v10" stroke-width="2.6"/>',
+    brush: '<rect x="14" y="4" width="14" height="14" rx="5"/><rect x="18" y="18" width="6" height="20" rx="3"/>',
+    drop: '<path d="M21 4C21 4 8 18 8 27a13 13 0 0 0 26 0C34 18 21 4 21 4z"/>',
+    pole: '<rect x="14" y="8" width="14" height="30" rx="5" fill="none" stroke-width="2.6"/><path d="M14 16l14-6M14 25l14-6M14 34l14-6" stroke-width="2.6"/>',
+  };
+  function tile(bg, fg, icon) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="${bg}"/>` +
+      `<g transform="translate(100 100) scale(5)" fill="${fg}" stroke="${fg}" stroke-width="0">${ICON[icon]}</g></svg>`;
+    return "data:image/svg+xml," + encodeURIComponent(svg);
+  }
+  CFG.gallery = [
+    { src: tile("#12303F", "#8FD3E6", "scissors"), alt: "Foto de exemplo: tesoura", caption: "Corte à tesoura" },
+    { src: tile("#C8382B", "#FFFFFF", "razor"), alt: "Foto de exemplo: navalha", caption: "Barba à navalha" },
+    { src: tile("#1B6580", "#EEF5F6", "comb"), alt: "Foto de exemplo: pente", caption: "Degradê" },
+    { src: tile("#C79A3B", "#1B1405", "brush"), alt: "Foto de exemplo: pincel", caption: "Toalha quente" },
+    { src: tile("#0B1F2A", "#EEF5F6", "drop"), alt: "Foto de exemplo: gota", caption: "Acabamento" },
+    { src: tile("#DCE9EC", "#C8382B", "pole"), alt: "Foto de exemplo: poste de barbeiro", caption: "A nossa casa" },
+  ];
+
+  /* ---- utilitários ---- */
+  const KEY = "apb-demo-v3", BKEY = "apb-demo-blocks-v3"; let mem = null, memB = null;
+  const toMin = (t) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+  const pad = (n) => String(n).padStart(2, "0");
+  const fromMin = (m) => pad(Math.floor(m / 60)) + ":" + pad(m % 60);
+  const weekday = (ds) => new Date(ds + "T00:00:00Z").getUTCDay();
+  const addDays = (ds, n) => { const d = new Date(ds + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  const now = () => { const d = new Date(); return { date: `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`, minutes: d.getHours() * 60 + d.getMinutes() }; };
+  const rid = () => "APB-" + Math.random().toString(16).slice(2, 8).toUpperCase();
+  const SVC = (id) => CFG.services.find((s) => s.id === id);
+
+  /* ---- histórico de exemplo: ~5 semanas para trás e 2 para a frente ---- */
+  const CLIENTS = [
+    ["Ricardo Silva", "912000101"], ["Tiago Costa", "934000202"], ["Miguel Santos", "965000303"], ["André Ferreira", "912000404"],
+    ["Pedro Almeida", "936000505"], ["João Martins", "963000606"], ["Diogo Rocha", "912000707"], ["Rui Pereira", "934000808"],
+    ["Bruno Carvalho", "965000909"], ["Hugo Lopes", "912001010"], ["Nuno Fernandes", "936001111"], ["Filipe Gomes", "963001212"],
+  ];
+  function rng(seed) {
+    let h = 2166136261; for (const c of seed) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); }
+    return () => { h += 0x6D2B79F5; let t = Math.imul(h ^ (h >>> 15), 1 | h); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  function seed() {
+    const n = now(), out = [];
+    for (let i = -35; i <= 14; i++) {
+      const day = addDays(n.date, i), hrs = CFG.hours[String(weekday(day))]; if (!hrs) continue;
+      const r = rng(day); let m = toMin(hrs[0]) + (r() < 0.5 ? 0 : 30);
+      const brk = CFG.breakTime ? [toMin(CFG.breakTime[0]), toMin(CFG.breakTime[1])] : null;
+      let count = 0; const maxN = i < 0 ? 7 : i === 0 ? 6 : 5;
+      while (m < toMin(hrs[1]) - 30 && count < maxN) {
+        const sv = CFG.services[Math.floor(r() * CFG.services.length)];
+        if (brk && m < brk[1] && m + sv.minutes > brk[0]) { m = brk[1]; continue; }
+        if (m + sv.minutes > toMin(hrs[1])) break;
+        if (r() < 0.78) {
+          const c = CLIENTS[Math.floor(r() * CLIENTS.length)], mode = r() < 0.4 ? "now" : "later", x = r();
+          let status;
+          if (i < 0 || (i === 0 && m + sv.minutes <= n.minutes)) status = x < 0.84 ? "concluida" : x < 0.92 ? "faltou" : "cancelada";
+          else if (mode === "now") status = x < 0.9 ? "paga" : "a_aguardar_pagamento";
+          else status = x < 0.93 ? "confirmada" : "cancelada";
+          out.push({ id: rid(), token: "x", day, time: fromMin(m), minutes: sv.minutes, service: sv.name, priceCents: sv.priceCents, name: c[0], phone: c[1], email: "", payMode: status === "confirmada" ? "later" : mode, status });
+          count++;
+        }
+        m += sv.minutes + (r() < 0.5 ? 0 : 30);
+      }
+    }
+    return out;
+  }
+  function load() {
+    try { const s = localStorage.getItem(KEY); if (s) return JSON.parse(s); } catch {}
+    if (mem) return mem;
+    const s = seed(); save(s); return s;
+  }
+  function save(l) { mem = l; try { localStorage.setItem(KEY, JSON.stringify(l)); } catch {} }
+  function loadB() {
+    try { const s = localStorage.getItem(BKEY); if (s) return JSON.parse(s); } catch {}
+    return memB || [];
+  }
+  function saveB(l) { memB = l; try { localStorage.setItem(BKEY, JSON.stringify(l)); } catch {} }
+  function reset() { mem = null; memB = null; try { localStorage.removeItem(KEY); localStorage.removeItem(BKEY); } catch {} }
+
+  const blocksOn = (day) => loadB().filter((b) => b.day === day);
+  const dayErr = (day) => {
+    const n = now();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(day || "")) return "Data inválida.";
+    if (day < n.date) return "Esse dia já passou.";
+    if (day > addDays(n.date, CFG.daysAhead)) return "Dia demasiado longe.";
+    if (!CFG.hours[String(weekday(day))]) return "Fechado nesse dia.";
+    if (blocksOn(day).some((b) => !b.from)) return "Fechado nesse dia.";
+    return null;
+  };
+  function slotsFor(day, minutes) {
+    if (dayErr(day)) return [];
+    const [open, close] = CFG.hours[String(weekday(day))];
+    const busy = load().filter((b) => b.day === day && b.status !== "cancelada").map((b) => [toMin(b.time), toMin(b.time) + b.minutes]);
+    if (CFG.breakTime) busy.push([toMin(CFG.breakTime[0]), toMin(CFG.breakTime[1])]);
+    blocksOn(day).forEach((b) => { if (b.from) busy.push([toMin(b.from), toMin(b.to)]); });
+    const n = now(), out = [];
+    for (let m = toMin(open); m + minutes <= toMin(close); m += CFG.slotMinutes) {
+      let ok = !busy.some(([s, e]) => m < e && s < m + minutes);
+      if (day === n.date && m < n.minutes + CFG.minLeadMinutes) ok = false;
+      out.push({ time: fromMin(m), ok });
+    }
+    return out;
+  }
+  const pub = (b) => ({ id: b.id, day: b.day, time: b.time, minutes: b.minutes, service: b.service, priceCents: b.priceCents, name: b.name, payMode: b.payMode, status: b.status });
+  const find = (id, token) => load().find((b) => b.id === id && b.token === token);
+
+  function validate(body) {
+    const svc = SVC(body.serviceId);
+    const phone = String(body.phone || "").replace(/[\s.\-()]/g, ""), name = String(body.name || "").trim();
+    if (!svc) return { error: [400, "Serviço inválido."] };
+    const e = dayErr(body.day); if (e) return { error: [400, e] };
+    if (name.length < 2) return { error: [400, "Indique o nome."] };
+    if (!/^(\+351)?[239]\d{8}$/.test(phone)) return { error: [400, "Indique um telemóvel português com 9 dígitos."] };
+    const slot = slotsFor(body.day, svc.minutes).find((s) => s.time === body.time);
+    if (!slot || !slot.ok) return { error: [409, "Essa hora acabou de ser ocupada. Escolha outra."] };
+    return { svc, phone, name };
+  }
+
+  function route(method, u, body) {
+    const p = u.pathname;
+    if (p === "/api/config") {
+      const { name, tagline, address, mapsLink, phone, whatsapp, instagram, facebook, hours, breakTime, daysAhead, cancelHoursBefore, services, team, gallery } = CFG;
+      const min = Math.min(...services.map((s) => s.minutes));
+      const closedDays = [...new Set(loadB().filter((b) => !b.from && b.day >= now().date).map((b) => b.day))];
+      return [200, { name, tagline, address, mapsLink, phone, whatsapp, instagram, facebook, hours, breakTime, daysAhead, cancelHoursBefore, services, team, gallery,
+        today: now().date, onlinePayments: true, closedDays, todayFull: !slotsFor(now().date, min).some((s) => s.ok) }];
+    }
+    if (p === "/api/availability") {
+      const svc = SVC(u.searchParams.get("service")), day = u.searchParams.get("day");
+      if (!svc) return [400, { error: "Serviço inválido." }];
+      const e = dayErr(day); if (e) return [400, { error: e }];
+      return [200, { day, slots: slotsFor(day, svc.minutes) }];
+    }
+    if (p === "/api/bookings" && method === "POST") {
+      const v = validate(body); if (v.error) return [v.error[0], { error: v.error[1] }];
+      const payNow = body.payMode === "now";
+      const b = { id: rid(), token: Math.random().toString(16).slice(2), day: body.day, time: body.time, minutes: v.svc.minutes, service: v.svc.name, priceCents: v.svc.priceCents,
+        name: v.name, phone: v.phone, email: String(body.email || "").trim(), payMode: payNow ? "now" : "later", status: payNow ? "a_aguardar_pagamento" : "confirmada" };
+      save([...load(), b]);
+      // com "Pagar agora" o site abre a página de pagamento simulada (apbDemoCheckout), que marca a marcação como paga
+      return [201, { booking: pub(b), token: b.token, ...(payNow ? { checkoutUrl: "demo://checkout" } : {}) }];
+    }
+    let m = p.match(/^\/api\/bookings\/([^/]+)$/);
+    if (m && method === "GET") { const b = find(m[1], u.searchParams.get("token")); return b ? [200, { booking: pub(b) }] : [404, { error: "Marcação não encontrada." }]; }
+    m = p.match(/^\/api\/bookings\/([^/]+)\/cancel$/);
+    if (m && method === "POST") {
+      const b = find(m[1], body.token); if (!b) return [404, { error: "Marcação não encontrada." }];
+      if (b.status === "paga") return [409, { error: "Esta marcação já está paga. Para cancelar e receber o reembolso, contacte a barbearia." }];
+      b.status = "cancelada"; save(load().map((x) => (x.id === b.id ? b : x))); return [200, { booking: pub(b) }];
+    }
+
+    /* ---- painel do administrador ---- */
+    if (p === "/api/admin/bookings" && method === "GET") {
+      const from = u.searchParams.get("from") || now().date, to = u.searchParams.get("to") || "9999-12-31";
+      const rows = load().filter((b) => b.day >= from && b.day <= to).sort((a, b) => (a.day + a.time).localeCompare(b.day + b.time));
+      return [200, { bookings: rows.map((b) => ({ ...pub(b), phone: b.phone, email: b.email || "" })) }];
+    }
+    if (p === "/api/admin/bookings" && method === "POST") {
+      const v = validate(body); if (v.error) return [v.error[0], { error: v.error[1] }];
+      const b = { id: rid(), token: Math.random().toString(16).slice(2), day: body.day, time: body.time, minutes: v.svc.minutes, service: v.svc.name, priceCents: v.svc.priceCents,
+        name: v.name, phone: v.phone, email: String(body.email || "").trim(), payMode: "later", status: body.paid ? "paga" : "confirmada" };
+      save([...load(), b]); return [201, { booking: pub(b) }];
+    }
+    m = p.match(/^\/api\/admin\/bookings\/([^/]+)\/status$/);
+    if (m && method === "POST") {
+      if (!["confirmada", "paga", "cancelada", "concluida", "faltou"].includes(body.status)) return [400, { error: "Estado inválido." }];
+      const l = load(), b = l.find((x) => x.id === m[1]); if (!b) return [404, { ok: false }];
+      b.status = body.status; save(l); return [200, { ok: true }];
+    }
+    if (p === "/api/admin/blocks" && method === "GET") {
+      const rows = loadB().filter((b) => b.day >= now().date).sort((a, b) => (a.day + (a.from || "")).localeCompare(b.day + (b.from || "")));
+      return [200, { blocks: rows }];
+    }
+    if (p === "/api/admin/blocks" && method === "POST") {
+      const day = body.day, from = body.from || null, to = body.to || null, reason = String(body.reason || "").slice(0, 80);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(day || "") || day < now().date) return [400, { error: "Escolha um dia a partir de hoje." }];
+      if (Boolean(from) !== Boolean(to)) return [400, { error: "Indique a hora de início e de fim." }];
+      if (from && toMin(from) >= toMin(to)) return [400, { error: "A hora de fim tem de ser depois da de início." }];
+      const blk = { id: "BLK-" + Math.random().toString(16).slice(2, 8).toUpperCase(), day, from, to, reason };
+      saveB([...loadB(), blk]);
+      const conflicts = load().filter((b) => b.day === day && b.status !== "cancelada" && (!from || (toMin(b.time) < toMin(to) && toMin(from) < toMin(b.time) + b.minutes))).length;
+      return [201, { block: blk, conflicts }];
+    }
+    m = p.match(/^\/api\/admin\/blocks\/([^/]+)$/);
+    if (m && method === "DELETE") { const l = loadB(), n = l.length; saveB(l.filter((b) => b.id !== m[1])); return [n !== loadB().length ? 200 : 404, { ok: n !== loadB().length }]; }
+    return [404, { error: "Não encontrado." }];
+  }
+
+  const realFetch = window.fetch.bind(window);
+  window.fetch = async (url, opts = {}) => {
+    const raw = typeof url === "string" ? url : (url && url.url) || String(url);
+    // base fixa: funciona também em pré-visualizações (about:blank, srcdoc, blob), onde location.href não serve de base
+    let u; try { u = new URL(raw, "http://demo.local/"); } catch { return realFetch(url, opts); }
+    if (!u.pathname.startsWith("/api/") || (u.origin !== "http://demo.local" && !/^file:/.test(u.protocol))) return realFetch(url, opts);
+    await new Promise((r) => setTimeout(r, 100));
+    let body = {}; try { body = opts.body ? JSON.parse(opts.body) : {}; } catch {}
+    const [status, data] = route((opts.method || "GET").toUpperCase(), u, body);
+    return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+  };
+
+  /* ---- página de pagamento SIMULADA (só na demonstração; no site real é a página segura do Stripe) ---- */
+  window.apbDemoCheckout = function (booking) {
+    return new Promise((resolve) => {
+      const full = load().find((x) => x.id === booking.id) || {};
+      const eurFmt = (c) => (c / 100).toLocaleString("pt-PT", { style: "currency", currency: "EUR" });
+      const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+      const field = (id, label, value, attrs) => {
+        const w = el("div", "field"), l = el("label", "", label), i = el("input");
+        l.htmlFor = id; i.id = id; i.value = value; Object.entries(attrs || {}).forEach(([k, v]) => i.setAttribute(k, v));
+        w.append(l, i); return [w, i];
+      };
+      const option = (id, title, sub, checked) => {
+        const w = el("div", "opt"), i = el("input"), l = el("label"), s = el("span");
+        i.type = "radio"; i.name = "demo-method"; i.id = id; i.checked = checked; l.htmlFor = id;
+        s.append(el("b", "", title), el("small", "", sub)); l.append(s); w.append(i, l); return [w, i];
+      };
+
+      const dlg = el("dialog"); dlg.setAttribute("aria-label", "Pagamento");
+      const box = el("div", "dlg"), view = el("div"); box.append(view); dlg.append(box);
+      let timer = null, done = false;
+      const finish = (ok) => {
+        if (done) return; done = true; clearTimeout(timer);
+        const l = load(), x = l.find((b) => b.id === booking.id);
+        if (x) { x.status = ok ? "paga" : "cancelada"; save(l); }
+        if (dlg.open) dlg.close(); dlg.remove(); resolve(ok);
+      };
+      dlg.addEventListener("cancel", (e) => { e.preventDefault(); finish(false); });
+
+      function wait(text, ms) {
+        const cancel = el("button", "btn ghost", "Cancelar pagamento"); cancel.type = "button"; cancel.addEventListener("click", () => finish(false));
+        const spin = el("div", "demo-spin"); spin.setAttribute("aria-hidden", "true");
+        const msg = el("p", "", text); msg.setAttribute("role", "status");
+        const row = el("div", "row"); row.append(cancel);
+        view.replaceChildren(el("h3", "", "A aguardar pagamento"), spin, msg, row);
+        timer = setTimeout(() => finish(true), ms);
+      }
+
+      function form() {
+        const [mbOpt, mb] = option("pm-mb", "MB WAY", "Aprova o pagamento na app do telemóvel", true);
+        const [cardOpt, card] = option("pm-card", "Cartão", "Visa ou Mastercard", false);
+        const notice = el("p", "msg", "Simulação: não introduza dados reais. Nada é cobrado nem guardado.");
+        const sum = el("p", "", `${booking.service} · ${booking.day.split("-").reverse().join("/")} às ${booking.time}`);
+        const total = el("div", "demo-total"); total.append(el("span", "", "Total a pagar"), el("b", "", eurFmt(booking.priceCents)));
+
+        const [mbF, phone] = field("pm-phone", "Telemóvel MB WAY", full.phone || "", { type: "tel", inputmode: "tel", autocomplete: "off", maxlength: "20" });
+        const mbPanel = el("div", "demo-panel"); mbPanel.append(mbF);
+        const [nF, num] = field("pm-num", "Número do cartão", "4242 4242 4242 4242", { inputmode: "numeric", autocomplete: "off", maxlength: "23" });
+        const [eF, exp] = field("pm-exp", "Validade", "12/30", { autocomplete: "off", maxlength: "5", placeholder: "MM/AA" });
+        const [cF, cvc] = field("pm-cvc", "CVC", "123", { inputmode: "numeric", autocomplete: "off", maxlength: "4" });
+        const [hF] = field("pm-holder", "Nome no cartão", full.name || "", { autocomplete: "off", maxlength: "60" });
+        const cardPanel = el("div", "demo-panel"); cardPanel.hidden = true;
+        const two = el("div", "demo-two"); two.append(eF, cF); cardPanel.append(nF, two, hF);
+
+        const err = el("div", "err"); err.setAttribute("role", "alert");
+        const pay = el("button", "btn", `Pagar ${eurFmt(booking.priceCents)}`); pay.type = "button";
+        const cancel = el("button", "btn ghost", "Cancelar"); cancel.type = "button";
+        const row = el("div", "row"); row.append(pay, cancel);
+        const opts = el("div", "opts"); opts.append(mbOpt, cardOpt);
+
+        const sync = () => { mbPanel.hidden = !mb.checked; cardPanel.hidden = !card.checked; err.textContent = ""; };
+        mb.addEventListener("change", sync); card.addEventListener("change", sync);
+        cancel.addEventListener("click", () => finish(false));
+        pay.addEventListener("click", () => {
+          err.textContent = "";
+          if (mb.checked) {
+            const t = phone.value.replace(/[\s.\-()]/g, "");
+            if (!/^(\+351)?9\d{8}$/.test(t)) { err.textContent = "Indique um número MB WAY válido (9 dígitos, a começar por 9)."; phone.focus(); return; }
+            wait(`Pedido enviado para ${phone.value.trim()}. Aprove o pagamento na app MB WAY.`, 3200);
+          } else {
+            if (!/^\d{12,19}$/.test(num.value.replace(/\s/g, ""))) { err.textContent = "Número de cartão inválido."; num.focus(); return; }
+            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(exp.value.trim())) { err.textContent = "Validade inválida. Use MM/AA."; exp.focus(); return; }
+            if (!/^\d{3,4}$/.test(cvc.value.trim())) { err.textContent = "CVC inválido."; cvc.focus(); return; }
+            wait("A processar o pagamento…", 1400);
+          }
+        });
+        view.replaceChildren(el("h3", "", "Pagamento"), notice, sum, total, el("p", "demo-lbl", "Método de pagamento"), opts, mbPanel, cardPanel, err, row);
+      }
+
+      form();
+      document.body.append(dlg); dlg.showModal();
+    });
+  };
+
+  /* ---- faixa de aviso ---- */
+  const style = document.createElement("style");
+  style.textContent = ".demo-site-dialog{}.demo-spin{width:34px;height:34px;margin:14px 0;border:4px solid var(--line,#CFDDE1);border-top-color:var(--tide,#1B6580);border-radius:50%;animation:demo-spin 1s linear infinite}@keyframes demo-spin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.demo-spin{animation:none}}.demo-total{display:flex;justify-content:space-between;align-items:baseline;font-size:1.3rem;padding:8px 0 14px;border-bottom:1px solid var(--line,#CFDDE1);margin-bottom:12px}.demo-lbl{font-weight:700;margin:4px 0 8px}.demo-panel{margin-top:14px}.demo-panel[hidden]{display:none}.demo-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.demo-bar{background:#C79A3B;color:#1B1405;padding:8px 14px;font:600 .9rem system-ui,sans-serif;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;text-align:center}.demo-bar button{font:inherit;background:transparent;border:1.5px solid #1B1405;color:#1B1405;border-radius:999px;padding:3px 12px;cursor:pointer}";
+  if (MODE === "cliente") style.textContent += "dialog{max-height:calc(100dvh - 24px);overflow:auto}";
+  document.head.append(style);
+  const bar = document.createElement("div"); bar.className = "demo-bar";
+  bar.append(document.createTextNode(MODE === "admin"
+    ? "Painel de demonstração com dados de exemplo. Mostra as marcações do site de demonstração, neste navegador."
+    : "Demonstração do site: nada é cobrado, as fotos e contactos são de exemplo e as marcações ficam só neste navegador."));
+  const rb = document.createElement("button"); rb.type = "button"; rb.textContent = "Repor dados de exemplo";
+  rb.addEventListener("click", () => { reset(); location.reload(); });
+  bar.append(rb);
+  document.addEventListener("DOMContentLoaded", () => document.body.prepend(bar));
+})();
+
+</script>
+<script>
+"use strict";
+(async function () {
+  const $ = (s) => document.querySelector(s);
+  const WD = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+  const WDL = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+  const MO = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+  const eur = (c) => (c / 100).toLocaleString("pt-PT", { style: "currency", currency: "EUR", minimumFractionDigits: c % 100 ? 2 : 0 });
+  const weekday = (ds) => new Date(ds + "T00:00:00Z").getUTCDay();
+  const addDays = (ds, n) => { const d = new Date(ds + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  const longDay = (ds) => { const d = new Date(ds + "T00:00:00Z"); return `${WDL[d.getUTCDay()]}, ${d.getUTCDate()} ${MO[d.getUTCMonth()]}`; };
+  const pad2 = (n) => String(n).padStart(2, "0");
+  const isHttps = (u) => typeof u === "string" && /^https:\/\//.test(u);
+
+  function h(tag, props, ...kids) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(props || {})) {
+      if (v === false || v == null) continue;
+      if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v === true ? "" : v);
+    }
+    for (const k of kids.flat()) if (k != null) e.append(k);
+    return e;
+  }
+  async function api(path, opts) {
+    const r = await fetch(path, opts);
+    let data = {};
+    try { data = await r.json(); } catch {}
+    if (!r.ok) { const err = new Error(data.error || "Algo correu mal. Tente outra vez."); err.status = r.status; throw err; }
+    return data;
+  }
+
+  let cfg;
+  try { cfg = await api("/api/config"); }
+  catch (err) { document.body.prepend(h("p", { class: "msg", text: "Não foi possível carregar o site. Atualize a página. (" + (err && err.message ? err.message : "erro") + ")" })); return; }
+
+  /* ---------- conteúdo fixo ---------- */
+  document.title = `${cfg.name} · Barbearia em Fermentelos`;
+  $("#tagline").textContent = cfg.tagline;
+  $("#yr").textContent = `© ${new Date().getFullYear()}`;
+  $("#addr").textContent = cfg.address;
+  $("#mapFrame").src = "https://www.google.com/maps?q=" + encodeURIComponent(`${cfg.name}, ${cfg.address}`) + "&output=embed";
+
+  $("#svcList").replaceChildren(...cfg.services.map((s) =>
+    h("div", { class: "svc" }, h("b", { text: s.name }), h("span", { class: "price", text: eur(s.priceCents) }),
+      h("p", { text: s.description || "" }), h("small", { text: `${s.minutes} min` }))));
+
+  $("#svcOpts").replaceChildren(...cfg.services.map((s) =>
+    h("div", { class: "opt" },
+      h("input", { type: "radio", name: "svc", id: "s-" + s.id, value: s.id }),
+      h("label", { for: "s-" + s.id }, h("span", {}, h("b", { text: s.name }), h("small", { text: `${s.minutes} min` })), h("b", { text: eur(s.priceCents) })))));
+
+  const order = [1, 2, 3, 4, 5, 6, 0];
+  $("#hoursList").replaceChildren(
+    ...order.map((d) => { const x = cfg.hours[String(d)]; return h("li", {}, h("span", { text: WDL[d][0].toUpperCase() + WDL[d].slice(1) }), h("span", { text: x ? `${x[0]} – ${x[1]}` : "Fechado" })); }),
+    ...(cfg.breakTime ? [h("li", {}, h("span", { text: "Pausa" }), h("span", { text: `${cfg.breakTime[0]} – ${cfg.breakTime[1]}` }))] : []));
+
+  const ICONS = {
+    phone: '<path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/>',
+    whatsapp: '<path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3zm4.6 12.3c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.3-1-2.5s.6-1.8.9-2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.5.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.3 0 .1 0 .6-.2 1.2z"/>',
+    instagram: '<rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2"/>',
+    facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8z"/>',
+    star: '<path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6-6.3 3.6 1.5-7L2 9.3l7-.8z"/>',
+    pin: '<path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>',
+  };
+  function chip(icon, text, href, external) {
+    const a = h("a", { class: "chip", href, rel: external ? "noopener" : false, target: external ? "_blank" : false });
+    const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("width", "20"); s.setAttribute("height", "20"); s.setAttribute("fill", "currentColor"); s.setAttribute("aria-hidden", "true");
+    s.innerHTML = ICONS[icon];
+    a.append(s, h("span", { text }));
+    return a;
+  }
+  const telHref = cfg.phone ? "tel:" + cfg.phone.replace(/[^\d+]/g, "") : "";
+  const waHref = cfg.whatsapp ? "https://wa.me/" + cfg.whatsapp.replace(/\D/g, "") : "";
+  const contact = [];
+  if (cfg.phone) contact.push(chip("phone", "Ligar", telHref));
+  if (cfg.whatsapp) contact.push(chip("whatsapp", "WhatsApp", waHref, true));
+  if (isHttps(cfg.mapsLink)) { contact.push(chip("pin", "Como chegar", cfg.mapsLink, true)); contact.push(chip("star", "Ver avaliações no Google", cfg.mapsLink, true)); }
+  const social = [];
+  if (isHttps(cfg.instagram)) social.push(chip("instagram", "Instagram", cfg.instagram, true));
+  if (isHttps(cfg.facebook)) social.push(chip("facebook", "Facebook", cfg.facebook, true));
+  $("#contactLinks").replaceChildren(...contact, ...social);
+  $("#footLinks").replaceChildren(...[...social.map((n) => n.cloneNode(true))]);
+  const quick = [];
+  if (cfg.phone) quick.push(chip("phone", "Ligar", telHref));
+  if (cfg.whatsapp) quick.push(chip("whatsapp", "WhatsApp", waHref, true));
+  $("#quick").replaceChildren(...quick);
+  if (cfg.phone) {
+    $("#mbar").replaceChildren(h("a", { class: "btn ghost", href: telHref, text: "Ligar" }), h("a", { class: "btn", href: "#marcar", text: "Marcar" }));
+    $("#mbar").hidden = false;
+    document.body.classList.add("has-mbar");
+  }
+
+  if (cfg.team && cfg.team.length) {
+    const initials = (n) => n.split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
+    $("#teamList").replaceChildren(...cfg.team.map((m) => h("div", { class: "member" },
+      m.photo ? h("img", { src: m.photo, alt: m.name, loading: "lazy" }) : h("div", { class: "ph", "aria-hidden": "true", text: initials(m.name) }),
+      h("b", { text: m.name }), h("span", { text: m.role || "" }))));
+    $("#equipa").hidden = false;
+  }
+  if (cfg.gallery && cfg.gallery.length) {
+    const lb = $("#lightbox");
+    $("#galList").replaceChildren(...cfg.gallery.map((g) => {
+      const btn = h("button", { class: "g-item", type: "button", "aria-label": "Ampliar: " + (g.caption || g.alt || "foto") },
+        h("img", { src: g.src, alt: g.alt || "Trabalho da barbearia", loading: "lazy" }),
+        g.caption ? h("span", { class: "g-cap", text: g.caption }) : null);
+      btn.addEventListener("click", () => { $("#lbImg").src = g.src; $("#lbImg").alt = g.alt || ""; $("#lbCap").textContent = g.caption || ""; lb.showModal(); });
+      return btn;
+    }));
+    $("#lbClose").addEventListener("click", () => lb.close());
+    lb.addEventListener("click", (e) => { if (e.target === lb) lb.close(); });
+    $("#galeria").hidden = false;
+  }
+
+  const faq = [
+    ["Posso pagar só no dia?", "Sim. Escolha “Pagar no dia”, a hora fica marcada e paga na barbearia, depois do serviço."],
+    ["Como funciona o pagamento online?", cfg.onlinePayments
+      ? "Escolha “Pagar agora” e será levado para uma página segura, onde paga com MB WAY ou cartão. A hora só fica garantida depois do pagamento."
+      : "O pagamento online ainda não está ativo. Por agora, pague no dia, na barbearia."],
+    ["Posso cancelar?", `Sim, até ${cfg.cancelHoursBefore} horas antes, no botão “Cancelar marcação” que aparece quando confirma. Se já pagou online, contacte a barbearia para o reembolso.`],
+    ["Onde fica a barbearia?", cfg.address + "."],
+  ];
+  $("#faqList").replaceChildren(...faq.map(([q, a]) => h("details", {}, h("summary", { text: q }), h("p", { text: a }))));
+
+  /* ---------- marcação ---------- */
+  const state = { svc: null, day: null, time: null };
+  const payNowEl = $("#payNow");
+  if (!cfg.onlinePayments) { payNowEl.disabled = true; $("#payNowSmall").textContent = "Ainda não está disponível"; }
+
+  const closedDays = new Set(cfg.closedDays || []);
+  const dayList = Array.from({ length: cfg.daysAhead + 1 }, (_, i) => addDays(cfg.today, i));
+  $("#dayOpts").replaceChildren(...dayList.map((ds) => {
+    const d = new Date(ds + "T00:00:00Z"), open = Boolean(cfg.hours[String(weekday(ds))]) && !closedDays.has(ds) && !(ds === cfg.today && cfg.todayFull);
+    return h("div", { class: "opt" },
+      h("input", { type: "radio", name: "day", id: "d-" + ds, value: ds, disabled: !open }),
+      h("label", { for: "d-" + ds }, h("span", { text: WD[d.getUTCDay()] }), h("b", { text: String(d.getUTCDate()) }), h("span", { text: MO[d.getUTCMonth()] })));
+  }));
+
+  let slotReq = 0;
+  async function loadSlots() {
+    const box = $("#slotBox");
+    if (!state.svc || !state.day) { box.replaceChildren(h("div", { class: "msg", text: "Escolha primeiro o serviço e o dia." })); return; }
+    const mine = ++slotReq;
+    box.replaceChildren(h("div", { class: "msg", text: "A ver as horas livres…" }));
+    try {
+      const { slots } = await api(`/api/availability?service=${encodeURIComponent(state.svc.id)}&day=${state.day}`);
+      if (mine !== slotReq) return;
+      if (!slots.some((s) => s.ok)) { state.time = null; box.replaceChildren(h("div", { class: "msg", text: "Sem horas livres neste dia. Experimente outro dia." })); refresh(); return; }
+      if (state.time && !slots.find((s) => s.time === state.time && s.ok)) state.time = null;
+      box.replaceChildren(h("div", { class: "slots", role: "radiogroup", "aria-label": "Hora" }, ...slots.map((s) =>
+        h("div", { class: "opt" },
+          h("input", { type: "radio", name: "time", id: "t-" + s.time, value: s.time, disabled: !s.ok, checked: state.time === s.time }),
+          h("label", { for: "t-" + s.time, text: s.time })))));
+      refresh();
+    } catch (e) { if (mine === slotReq) box.replaceChildren(h("div", { class: "msg", text: e.message })); }
+  }
+
+  function refresh() {
+    const payNow = payNowEl.checked;
+    $("#sSvc").textContent = state.svc ? state.svc.name : "—";
+    $("#sDay").textContent = state.day ? longDay(state.day) : "—";
+    $("#sTime").textContent = state.time || "—";
+    $("#sPay").textContent = payNow ? "Agora" : "No dia";
+    $("#sTotal").textContent = state.svc ? eur(state.svc.priceCents) : "—";
+    const ready = state.svc && state.day && state.time;
+    $("#submit").disabled = !ready;
+    $("#submit").textContent = payNow ? "Continuar para o pagamento" : "Confirmar marcação";
+    $("#hint").textContent = ready ? (payNow ? "No passo seguinte escolhe MB WAY ou cartão. A hora fica garantida depois do pagamento." : "Paga só quando chegar à barbearia.") : "Escolha serviço, dia e hora para continuar.";
+  }
+
+  $("#form").addEventListener("change", (e) => {
+    const n = e.target.name;
+    if (n === "svc") state.svc = cfg.services.find((s) => s.id === e.target.value);
+    if (n === "day") state.day = e.target.value;
+    if (n === "time") state.time = e.target.value;
+    if (n === "svc" || n === "day") loadSlots();
+    refresh();
+  });
+
+  /* ---------- validação e envio ---------- */
+  function setErr(id, msg) { $("#e-" + id).textContent = msg || ""; $("#" + id).setAttribute("aria-invalid", msg ? "true" : "false"); return !msg; }
+  function validate() {
+    const nome = $("#nome").value.trim(), tel = $("#tel").value.replace(/[\s.\-()]/g, ""), mail = $("#email").value.trim();
+    const oks = [
+      [setErr("nome", nome.length < 2 ? "Indique o seu nome." : ""), "#nome"],
+      [setErr("tel", /^(\+351)?[239]\d{8}$/.test(tel) ? "" : "Indique um telemóvel português com 9 dígitos."), "#tel"],
+      [setErr("email", mail && !/^\S+@\S+\.\S+$/.test(mail) ? "Este email não parece correto." : ""), "#email"],
+    ];
+    const bad = oks.find(([ok]) => !ok);
+    if (bad) $(bad[1]).focus();
+    return !bad;
+  }
+
+  // Funciona por clique direto: algumas pré-visualizações bloqueiam o envio de formulários (sandbox sem allow-forms).
+  $("#form").addEventListener("submit", (e) => e.preventDefault());
+  $("#submit").addEventListener("click", (e) => { e.preventDefault(); submitBooking(); });
+  $("#form").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.tagName === "INPUT" && e.target.type !== "radio") { e.preventDefault(); if (!$("#submit").disabled) submitBooking(); } });
+
+  async function submitBooking() {
+    if ($("#submit").disabled) return;
+    $("#e-form").textContent = "";
+    if (!(state.svc && state.day && state.time) || !validate()) return;
+    const btn = $("#submit"); btn.disabled = true; btn.textContent = "A guardar…";
+    const payNow = payNowEl.checked;
+    try {
+      const out = await api("/api/bookings", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ serviceId: state.svc.id, day: state.day, time: state.time, name: $("#nome").value, phone: $("#tel").value, email: $("#email").value, payMode: payNow ? "now" : "later" }),
+      });
+      if (out.checkoutUrl) {
+        if (typeof window.apbDemoCheckout === "function") {
+          // só na demonstração: página de pagamento simulada, sem sair do site
+          const paid = await window.apbDemoCheckout(out.booking);
+          if (paid) {
+            const r = await api(`/api/bookings/${encodeURIComponent(out.booking.id)}?token=${encodeURIComponent(out.token)}`);
+            showBooking(r.booking, out.token);
+          } else {
+            $("#e-form").textContent = "Pagamento cancelado. A hora foi libertada: escolha uma hora e tente outra vez.";
+            state.time = null; loadSlots();
+          }
+          refresh(); return;
+        }
+        location.href = out.checkoutUrl; return;
+      }
+      showBooking(out.booking, out.token);
+    } catch (err) {
+      $("#e-form").textContent = err.message;
+      if (err.status === 409) { state.time = null; loadSlots(); }
+    }
+    refresh();
+  }
+
+  /* ---------- janela de confirmação ---------- */
+  const dlg = $("#done");
+  function showBooking(b, token, opts = {}) {
+    $("#dTitle").textContent = opts.title || (b.status === "paga" ? "Marcação paga" : b.status === "cancelada" ? "Marcação cancelada" : "Marcação confirmada");
+    const body = [h("p", {}, h("b", { text: b.service }), `, ${longDay(b.day)} às `, h("b", { text: b.time }), ".")];
+    body.push(h("p", { text: cfg.address + "." }));
+    if (b.status === "confirmada") body.push(h("p", {}, "Total a pagar no dia: ", h("b", { text: eur(b.priceCents) }), "."));
+    if (b.status === "paga") body.push(h("p", { text: "Pagamento recebido. Obrigado!" }));
+    if (b.status === "a_aguardar_pagamento") body.push(h("p", { text: "Ainda não recebemos o pagamento. Pode demorar um minuto a confirmar." }));
+    if (opts.note) body.push(h("p", { text: opts.note }));
+    $("#dBody").replaceChildren(...body);
+    $("#dRef").textContent = "Referência " + b.id;
+    const acts = [h("button", { class: "btn", type: "button", id: "dClose", text: "Fechar" })];
+    if (b.status !== "cancelada") {
+      const stamp = (mins) => b.day.replace(/-/g, "") + "T" + pad2(Math.floor(mins / 60)) + pad2(mins % 60) + "00";
+      const startMin = Number(b.time.slice(0, 2)) * 60 + Number(b.time.slice(3, 5));
+      const gcal = "https://calendar.google.com/calendar/render?" + new URLSearchParams({
+        action: "TEMPLATE", text: `${b.service} — ${cfg.name}`, dates: `${stamp(startMin)}/${stamp(startMin + b.minutes)}`,
+        details: `Marcação ${b.id}`, location: cfg.address,
+      }).toString();
+      acts.push(h("a", { class: "btn ghost", href: gcal, target: "_blank", rel: "noopener", text: "Google Calendar" }));
+      acts.push(h("button", { class: "btn ghost", type: "button", id: "dCancel", text: "Cancelar marcação" }));
+    }
+    $("#dActs").replaceChildren(...acts);
+    $("#dClose")?.addEventListener("click", () => { dlg.close(); if (!opts.keepPage) location.reload(); });
+    $("#dCancel")?.addEventListener("click", async () => {
+      try {
+        const out = await api(`/api/bookings/${encodeURIComponent(b.id)}/cancel`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token }) });
+        showBooking(out.booking, token, { keepPage: opts.keepPage });
+      } catch (err) { $("#dBody").append(h("p", { class: "err", text: err.message })); }
+    });
+    if (!dlg.open) dlg.showModal();
+  }
+
+  /* ---------- regresso do pagamento ---------- */
+  const q = new URLSearchParams(location.search);
+  const paidId = q.get("pago"), canceledId = q.get("cancelado"), tok = q.get("t");
+  if ((paidId || canceledId) && tok) {
+    history.replaceState(null, "", location.pathname);
+    try {
+      if (canceledId) {
+        const out = await api(`/api/bookings/${encodeURIComponent(canceledId)}/cancel`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: tok }) });
+        showBooking(out.booking, tok, { title: "Pagamento cancelado", note: "A hora foi libertada. Pode escolher outra e tentar de novo.", keepPage: true });
+      } else {
+        let out;
+        for (let i = 0; i < 6; i++) {
+          out = await api(`/api/bookings/${encodeURIComponent(paidId)}?token=${encodeURIComponent(tok)}`);
+          if (out.booking.status !== "a_aguardar_pagamento") break;
+          await new Promise((r) => setTimeout(r, 2000));
+        }
+        showBooking(out.booking, tok, { keepPage: true });
+      }
+    } catch (err) {
+      document.querySelector("#marcar .wrap").prepend(h("p", { class: "msg", text: err.message }));
+    }
+  }
+
+  refresh();
+})();
+
+</script>
+</body>
+</html>

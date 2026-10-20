@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Água pela Barba · Barbearia em Fermentelos</title>
+<meta name="description" content="Marque o seu corte ou barba em Fermentelos. Escolha a hora e pague agora ou no dia.">
+<meta name="theme-color" content="#0B1F2A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='10' y='2' width='12' height='28' rx='6' fill='%230B1F2A'/%3E%3Cpath d='M10 10l12-6M10 18l12-6M10 26l12-6' stroke='%23C8382B' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#topo" id="brandName">Água pela Barba</a>
+    <nav aria-label="Principal">
+      <a href="#servicos">Serviços</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="#onde">Onde</a>
+      <a class="btn small" href="#marcar">Marcar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div class="hero-text">
+        <h1><span>Água</span><span>pela Barba</span></h1>
+        <p class="lead" id="tagline">Corte e barba em Fermentelos.</p>
+        <p class="lead2">Escolha a hora, pague agora ou só quando chegar.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#marcar">Marcar a minha hora</a>
+          <a class="link" href="#servicos">Ver serviços e preços</a>
+        </div>
+        <div class="quick" id="quick"></div>
+      </div>
+      <div class="pole" aria-hidden="true"><div class="pole-cap"></div><div class="pole-tube"><div class="stripes"></div></div><div class="pole-cap"></div></div>
+    </div>
+  </section>
+
+  <section id="servicos" class="band">
+    <div class="wrap">
+      <h2>Serviços</h2>
+      <p class="sub">Preços finais, com IVA incluído.</p>
+      <div class="services" id="svcList"></div>
+    </div>
+  </section>
+
+  <section id="como" class="wrap how">
+    <h2>Como marcar</h2>
+    <ol class="steps">
+      <li><b>Escolha</b><span>o serviço, o dia e uma hora livre.</span></li>
+      <li><b>Deixe</b><span>o seu nome e telemóvel.</span></li>
+      <li><b>Pague</b><span>agora ou só no dia, na barbearia.</span></li>
+    </ol>
+  </section>
+
+  <section id="marcar" class="book-sec">
+    <div class="wrap">
+      <h2>Marque a sua hora</h2>
+      <p class="sub">Só aparecem horas livres. A confirmação fica logo no ecrã.</p>
+
+      <form class="book" id="form" novalidate>
+        <div class="book-main">
+          <fieldset>
+            <legend>Serviço</legend>
+            <div class="opts" id="svcOpts"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Dia</legend>
+            <div class="days" id="dayOpts" role="radiogroup" aria-label="Dia"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Hora</legend>
+            <div id="slotBox"><div class="msg">Escolha primeiro o serviço e o dia.</div></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Os seus dados</legend>
+            <div class="field"><label for="nome">Nome</label><input id="nome" autocomplete="name" maxlength="80" required><div class="err" id="e-nome"></div></div>
+            <div class="field"><label for="tel">Telemóvel</label><input id="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="912 345 678" maxlength="20" required><div class="err" id="e-tel"></div></div>
+            <div class="field"><label for="email">Email (opcional)</label><input id="email" type="email" autocomplete="email" maxlength="120"><div class="err" id="e-email"></div></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Pagamento</legend>
+            <div class="opts">
+              <div class="opt"><input type="radio" name="pay" id="payLater" value="later" checked><label for="payLater"><span><b>Pagar no dia</b><small>Paga na barbearia, depois do serviço</small></span></label></div>
+              <div class="opt"><input type="radio" name="pay" id="payNow" value="now"><label for="payNow"><span><b>Pagar agora</b><small id="payNowSmall">MB WAY ou cartão, em página segura</small></span></label></div>
+            </div>
+          </fieldset>
+          <div class="err form-err" id="e-form" role="alert"></div>
+        </div>
+
+        <aside class="sum" aria-live="polite">
+          <h3>A sua marcação</h3>
+          <dl>
+            <dt>Serviço</dt><dd id="sSvc">—</dd>
+            <dt>Dia</dt><dd id="sDay">—</dd>
+            <dt>Hora</dt><dd id="sTime">—</dd>
+            <dt>Pagamento</dt><dd id="sPay">No dia</dd>
+          </dl>
+          <div class="total"><span>Total</span><span id="sTotal">—</span></div>
+          <button class="btn full" id="submit" type="button" disabled>Confirmar marcação</button>
+          <p class="hint" id="hint">Escolha serviço, dia e hora para continuar.</p>
+        </aside>
+      </form>
+    </div>
+  </section>
+
+  <section id="equipa" class="wrap sec" hidden>
+    <h2>A equipa</h2>
+    <div class="team" id="teamList"></div>
+  </section>
+
+  <section id="galeria" class="wrap sec" hidden>
+    <h2>Trabalhos</h2>
+    <div class="gallery" id="galList"></div>
+  </section>
+
+  <section id="duvidas" class="wrap sec faq">
+    <h2>Dúvidas</h2>
+    <div id="faqList"></div>
+  </section>
+
+  <section id="onde" class="band">
+    <div class="wrap where">
+      <div>
+        <h2>Onde estamos</h2>
+        <p class="sub" id="addr"></p>
+        <div class="chips" id="contactLinks"></div>
+        <ul class="hours" id="hoursList"></ul>
+      </div>
+      <iframe class="map" id="mapFrame" title="Mapa da barbearia em Fermentelos" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap foot"><span><span id="yr"></span> Água pela Barba · Fermentelos</span><span class="chips small" id="footLinks"></span></div></footer>
+
+<div class="mbar" id="mbar" hidden></div>
+
+<dialog id="lightbox" class="lb" aria-label="Foto ampliada">
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="btn ghost lb-x" id="lbClose" type="button">Fechar</button>
+</dialog>
+
+<dialog id="done" aria-labelledby="dTitle">
+  <div class="dlg">
+    <h3 id="dTitle"></h3>
+    <div id="dBody"></div>
+    <div class="ref" id="dRef"></div>
+    <div class="row" id="dActs"></div>
+  </div>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
