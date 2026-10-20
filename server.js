@@ -26,7 +26,7 @@ const stripe = STRIPE_KEY ? require("stripe")(STRIPE_KEY) : null;
 if (!DATABASE_URL) { console.error("Falta a variável DATABASE_URL (ligação Postgres/Supabase). Veja o README."); process.exit(1); }
 types.setTypeParser(1184, (v) => new Date(v).toISOString()); // timestamptz -> texto ISO
 const local = /@(localhost|127\.0\.0\.1)(:|\/)/.test(DATABASE_URL);
-const pool = new Pool({ connectionString: DATABASE_URL, max: 8, ssl: local ? false : { rejectUnauthorized: false } });
+const pool = new Pool({ connectionString: DATABASE_URL, max: process.env.VERCEL ? 1 : 8, ssl: local ? false : { rejectUnauthorized: false } });
 pool.on("error", (e) => console.warn("[base de dados]", e.message));
 const q = async (text, params = [], c = pool) => (await c.query(text, params)).rows;
 const one = async (text, params, c) => (await q(text, params, c))[0];
@@ -137,6 +137,7 @@ async function insertBooking(day, time, svc, [id, token, name, phone, email, pay
 /* ---------- app ---------- */
 const app = express();
 app.set("trust proxy", 1);
+app.use("/api", (req, res, next) => ready.then(() => next(), next)); // garante o esquema antes do 1.º pedido (funções serverless)
 app.disable("x-powered-by");
 app.use((req, res, next) => {
   res.set({
@@ -348,4 +349,5 @@ if (require.main === module) {
   ready.then(() => app.listen(PORT, () => console.log(`Água pela Barba em ${BASE_URL} (pagamentos online: ${stripe ? "ativos" : "desativados"})`)))
     .catch((e) => { console.error("Não consegui ligar à base de dados:", e.message); process.exit(1); });
 }
-module.exports = { app, pool, ready };
+module.exports = app; // o Vercel usa a exportação por defeito
+Object.assign(module.exports, { app, pool, ready });

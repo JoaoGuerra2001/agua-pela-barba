@@ -25,8 +25,8 @@ Os valores atuais são **exemplos**; só o nome e a morada vêm do Google Maps.
   As secções só aparecem se tiverem conteúdo.
 
 ## 3. Publicar
-Precisa de um serviço que corra Node.js (Render, Railway, Fly.io…). Não precisa de disco: os dados ficam no Supabase.
-1. Envie esta pasta para um repositório e crie um serviço Node (`npm install` / `npm start`).
+Pensado para o **Vercel** (o Express corre como função; `vercel.json` já incluído) e serve também Render, Railway ou Fly.io. Não precisa de disco: os dados ficam no Supabase. No Vercel use em `DATABASE_URL` o endereço do **Transaction pooler** (porta 6543) do Supabase, que é o indicado para funções serverless.
+1. No Vercel: Add New › Project › importe o repositório do GitHub (Framework: Other). Noutros serviços: `npm install` / `npm start`.
 2. Defina as variáveis de `.env.example`. `BASE_URL` é o endereço público final (com https).
 3. Em `DATABASE_URL` ponha a ligação do Supabase (Project Settings › Database › Connection string › **Session pooler**, com a palavra-passe da base de dados). É um segredo: só nas variáveis do alojamento.
 4. Ligue o domínio da barbearia.

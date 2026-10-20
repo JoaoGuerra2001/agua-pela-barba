@@ -10,6 +10,10 @@ Escrever sempre em português de Portugal (textos, commits, comentários).
 - `demo/` demos em ficheiro único: `shim.js` simula o servidor; `node demo/build.js` regenera `demo/*.html`
 - `test/api.test.js` testes da API (precisam de um Postgres de teste)
 
+## Alojamento
+- Vercel (Express como função: `module.exports = app` em `server.js`, `vercel.json`). `DATABASE_URL` = Transaction pooler do Supabase (porta 6543). Sem disco nem processos em segundo plano.
+- O limite de pedidos (`limit()`) é em memória, por instância: no Vercel é só uma proteção fraca.
+
 ## Comandos
 - `npm install` · `TEST_DATABASE_URL=postgres://... npm test` (tem de passar sempre; apaga as tabelas, usar só uma base de teste, nunca a real) · `DATABASE_URL=... ADMIN_PASSWORD=xxx npm start` (porta 3000) · `npm run build:demo`
 

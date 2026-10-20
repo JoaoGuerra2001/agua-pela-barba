@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "server.js": {
+      "includeFiles": "{config.json,db/**,admin/**,public/**}",
+      "maxDuration": 30
+    }
+  }
+}
